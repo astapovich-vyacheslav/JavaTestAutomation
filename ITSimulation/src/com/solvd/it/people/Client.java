@@ -2,6 +2,7 @@ package com.solvd.it.people;
 
 public class Client extends Person {
     private String request;
+
     //Add requirement property;
 
     public String getRequest() {
@@ -9,6 +10,11 @@ public class Client extends Person {
     }
 
     public void setRequest(String request) {
+        this.request = request;
+    }
+
+    public Client(String name, String dateOfBirth, String request) {
+        super(name, dateOfBirth);
         this.request = request;
     }
 }

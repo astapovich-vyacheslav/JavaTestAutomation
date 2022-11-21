@@ -4,6 +4,11 @@ public class Person {
     private String name;
     private String dateOfBirth; //redo as class
 
+    public Person(String name, String dateOfBirth) {
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+    }
+
     //Add age getting method
     public String getName() {
         return this.name;
