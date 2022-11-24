@@ -1,7 +1,9 @@
 package com.solvd.it.requirements;
 
+import java.util.Date;
+
 public class Requirement {
-    private String deadline;
+    private Date deadline;
 
     public int getBudget() {
         return budget;
@@ -13,15 +15,15 @@ public class Requirement {
 
     private int budget;
 
-    public String getDeadline() {
+    public Date getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(String deadline) {
+    public void setDeadline(Date deadline) {
         this.deadline = deadline;
     }
 
-    public Requirement(String deadline, int budget) {
+    public Requirement(Date deadline, int budget) {
         this.deadline = deadline;
         this.budget = budget;
     }
