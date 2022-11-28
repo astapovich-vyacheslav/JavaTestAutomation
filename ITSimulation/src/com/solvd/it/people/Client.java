@@ -1,5 +1,6 @@
 package com.solvd.it.people;
 
+import com.solvd.it.apps.App;
 import com.solvd.it.requirements.Requirement;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ public class Client extends Person {
     private ArrayList<Requirement> request = new ArrayList<>();
     private String projectName;
     private final int id;
+    private int suggestedPrice;
 
     public int getId() {
         return id;
@@ -22,8 +24,6 @@ public class Client extends Person {
     public void setSuggestedPrice(int suggestedPrice) {
         this.suggestedPrice = suggestedPrice;
     }
-
-    private int suggestedPrice;
 
     public ArrayList<Requirement> getRequest() {
         return this.request;
@@ -71,5 +71,11 @@ public class Client extends Person {
     @Override
     public int hashCode() {
         return Objects.hash(request, projectName, id, suggestedPrice);
+    }
+
+    @Override
+    public boolean doAction(/*App app, int rating*/) {
+        //app.setRating(rating);
+        return true;
     }
 }

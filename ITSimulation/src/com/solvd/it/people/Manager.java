@@ -13,6 +13,10 @@ public class Manager extends Worker {
         return totalOutcome;
     }
 
+    public void setTotalOutcome(int totalOutcome) {
+        this.totalOutcome = totalOutcome;
+    }
+
     public void addClient(Client client) {
         this.clientsMap.put(client, new IncomeAnalyzer(client, this.totalOutcome));
     }
@@ -33,14 +37,39 @@ public class Manager extends Worker {
         }
     }
 
+    public Manager(Worker worker) {
+        super(worker.getName(), worker.getDateOfBirth(), worker.getId(), worker.getProjectIncome());
+        this.clientsMap = new Hashtable<>();
+    }
+
     public ProfitReport generateProfitReport(Client client) {
         int profit = this.clientsMap.get(client).getProfit();
         return new ProfitReport(profit, client.getProjectName());
     }
 
+    public int getProfitFromClient(Client client) {
+        return this.clientsMap.get(client).getProfit();
+    }
+
     @Override
-    boolean work() {
-        System.out.println("Manager is working");
+    public boolean doAction() {
+        System.out.println(this.getName() + " is working");
         return true;
+    }
+
+    public boolean refreshClientMap(ArrayList<Client> clients) {
+        try {
+            for (Client client :
+                    clients) {
+                this.clientsMap.put(client, new IncomeAnalyzer(client, totalOutcome));
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkProfitability(Client client) {
+        return clientsMap.get(client).isProfitable();
     }
 }

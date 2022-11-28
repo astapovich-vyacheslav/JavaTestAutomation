@@ -35,4 +35,6 @@ public abstract class Person {
         long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS) / DAYS_IN_YEAR;
         return (int) diff;
     }
+
+    abstract boolean doAction();
 }

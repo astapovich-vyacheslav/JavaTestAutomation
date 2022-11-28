@@ -38,18 +38,22 @@ public class Director extends Worker {
         super(name, dateOfBirth, id, projectIncome);
     }
 
+    public Director(Worker worker) {
+        super(worker.getName(), worker.getDateOfBirth(), worker.getId(), worker.getProjectIncome());
+    }
+
     public int giveSalary(Worker worker, int salary) {
         worker.getIncome(salary);
         return worker.getTotalIncome();
     }
-    
+
     public int getIncome(int income, ProfitReport report) {
         this.setTotalIncome(this.getTotalIncome() + income + report.getProjectProfit());
         return this.getTotalIncome();
     }
 
     @Override
-    boolean work() {
+    public boolean doAction() {
         System.out.println("Director is working");
         return true;
     }

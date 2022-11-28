@@ -3,6 +3,13 @@ package com.solvd.it.people;
 import java.util.Date;
 
 public class Programmer extends Worker {
+    enum Rank {
+        JUNIOR,
+        SENIOR,
+        TECHLEAD
+    }
+
+    private Rank rank;
     private String usedTechnology;
 
     public String getUsedTechnology() {
@@ -18,10 +25,22 @@ public class Programmer extends Worker {
         this.usedTechnology = usedTechnology;
     }
 
+    public Programmer(Worker worker) {
+        super(worker.getName(), worker.getDateOfBirth(), worker.getId(), worker.getProjectIncome());
+    }
+
 
     @Override
-    boolean work() {
-        System.out.println("Programmer is working");
+    public boolean doAction() {
+        System.out.println(this.getName() + " is working");
         return true;
+    }
+
+    public Rank raise() {
+        if (this.rank == Rank.JUNIOR)
+            this.rank = Rank.SENIOR;
+        if (this.rank == Rank.SENIOR)
+            this.rank = Rank.TECHLEAD;
+        return this.rank;
     }
 }

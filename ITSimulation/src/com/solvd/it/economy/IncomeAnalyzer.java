@@ -83,6 +83,6 @@ public class IncomeAnalyzer {
     }
 
     public boolean isProfitable() {
-        return profit > 0;
+        return this.getProfit() > 0;
     }
 }

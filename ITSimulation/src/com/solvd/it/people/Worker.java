@@ -3,7 +3,7 @@ package com.solvd.it.people;
 import java.util.Date;
 import java.util.Objects;
 
-public abstract class Worker extends Person {
+public class Worker extends Person {
     private int projectIncome;
     private final int id;
     private int totalIncome = 0;
@@ -39,7 +39,6 @@ public abstract class Worker extends Person {
         return this.totalIncome;
     }
 
-    abstract boolean work();
 
     @Override
     public String toString() {
@@ -61,5 +60,10 @@ public abstract class Worker extends Person {
     @Override
     public int hashCode() {
         return Objects.hash(projectIncome, id, totalIncome);
+    }
+
+    @Override
+    boolean doAction() {
+        return false;
     }
 }
