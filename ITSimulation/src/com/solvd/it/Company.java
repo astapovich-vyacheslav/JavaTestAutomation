@@ -8,17 +8,15 @@ import com.solvd.it.people.Manager;
 import com.solvd.it.people.Programmer;
 
 import java.security.KeyPair;
-import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Hashtable;
-import java.util.Map;
+import java.util.*;
 
 public final class Company {
-    private ArrayList<Programmer> programmers;
+    public static int totalOutcome = 0;
+    private ArrayList<Programmer> programmers = new ArrayList<>();
     private Manager manager;
     private Director director;
     private AllApps apps;
-    private ArrayList<Client> clients;
+    private ArrayList<Client> clients = new ArrayList<>();
 
     enum ProjectState {
         NOT_READY,
@@ -26,7 +24,7 @@ public final class Company {
         NOT_PROFITABLE
     }
 
-    private Map<Client, ProjectState> projectStates;
+    private Map<Client, ProjectState> projectStates = new HashMap<>();
 
     public Manager getManager() {
         return manager;
@@ -34,6 +32,7 @@ public final class Company {
 
     public void setManager(Manager manager) {
         this.manager = manager;
+        totalOutcome += manager.getProjectIncome();
     }
 
     public Director getDirector() {
@@ -42,6 +41,7 @@ public final class Company {
 
     public void setDirector(Director director) {
         this.director = director;
+        totalOutcome += director.getProjectIncome();
     }
 
     public boolean addApp(App app) {
@@ -56,6 +56,7 @@ public final class Company {
     public boolean addProgrammer(Programmer programmer) {
         try {
             programmers.add(programmer);
+            totalOutcome += programmer.getProjectIncome();
         } catch (Exception e) {
             return false;
         }
@@ -65,6 +66,7 @@ public final class Company {
     public boolean removeProgrammer(Programmer programmer) {
         try {
             programmers.remove(programmer);
+            totalOutcome -= programmer.getProjectIncome();
         } catch (Exception e) {
             return false;
         }
@@ -86,22 +88,6 @@ public final class Company {
     }
 
     public Company() {
-        clients = new ArrayList<>();
-        programmers = new ArrayList<>();
-        initializeProjectStates();
-    }
-
-    private boolean initializeProjectStates() {
-        try {
-            projectStates = new Hashtable<>();
-            for (Client client :
-                    clients) {
-                projectStates.put(client, ProjectState.NOT_READY);
-            }
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
     }
 
     public int completeWork() {
@@ -109,7 +95,7 @@ public final class Company {
         for (Map.Entry<Client, ProjectState> entry :
                 projectStates.entrySet()) {
             if (entry.getValue() != ProjectState.READY) {
-                this.manager.setTotalOutcome(this.getTotalOutcome());
+                //this.manager.setTotalOutcome(this.getTotalOutcome());
                 this.manager.refreshClientMap(this.clients);
                 this.manager.doAction();
                 if (!this.manager.checkProfitability(entry.getKey())) {

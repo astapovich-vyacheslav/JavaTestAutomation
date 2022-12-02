@@ -57,6 +57,10 @@ public class IncomeAnalyzer {
         return profit;
     }
 
+    public int getProfit(Client client, int totalOutcome) {
+        return client.getSuggestedPrice() - totalOutcome;
+    }
+
     public IncomeAnalyzer(ArrayList<Worker> workersList, Client client) {
         IncomeAnalyzer.workers = workersList;
         this.client = client;
@@ -82,7 +86,15 @@ public class IncomeAnalyzer {
         IncomeAnalyzer.workers = workersList;
     }
 
+    public IncomeAnalyzer() {
+
+    }
+
     public boolean isProfitable() {
         return this.getProfit() > 0;
+    }
+
+    public boolean isProfitable(Client client, int totalOutcome) {
+        return client.getSuggestedPrice() > totalOutcome;
     }
 }

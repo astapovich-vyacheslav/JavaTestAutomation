@@ -29,10 +29,10 @@ public abstract class Person {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public int getAge() {
+    public final int getAge() {
         Date now = new Date();
-        long diffInMillies = Math.abs(now.getTime() - dateOfBirth.getTime());
-        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS) / DAYS_IN_YEAR;
+        long diffInMilliseconds = Math.abs(now.getTime() - dateOfBirth.getTime());
+        long diff = TimeUnit.DAYS.convert(diffInMilliseconds, TimeUnit.MILLISECONDS) / DAYS_IN_YEAR;
         return (int) diff;
     }
 
