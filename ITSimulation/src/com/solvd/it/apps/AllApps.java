@@ -2,7 +2,7 @@ package com.solvd.it.apps;
 
 import java.util.ArrayList;
 
-public class AllApps {
+public final class AllApps {
     private ArrayList<App> allApps = new ArrayList<>();
     private double averageRating;
 

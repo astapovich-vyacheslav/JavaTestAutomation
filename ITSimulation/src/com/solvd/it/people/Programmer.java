@@ -6,7 +6,21 @@ public class Programmer extends Worker {
     enum Rank {
         JUNIOR,
         SENIOR,
-        TECHLEAD
+        TECHLEAD;
+
+        private int minimumSalary;
+
+        Rank() {
+
+        }
+
+        int getMinimumSalary() {
+            return this.minimumSalary;
+        }
+
+        void setMinimumSalary(int minS) {
+            this.minimumSalary = minS;
+        }
     }
 
     private Rank rank;

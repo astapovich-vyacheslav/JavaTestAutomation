@@ -5,7 +5,7 @@ import com.solvd.it.economy.reports.ProfitReport;
 
 import java.util.*;
 
-public class Manager extends Worker {
+public final class Manager extends Worker {
     private Dictionary<Client, IncomeAnalyzer> clientsMap;
     private int totalOutcome;
 

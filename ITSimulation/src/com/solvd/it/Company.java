@@ -13,7 +13,7 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.Map;
 
-public class Company {
+public final class Company {
     private ArrayList<Programmer> programmers;
     private Manager manager;
     private Director director;
@@ -81,6 +81,10 @@ public class Company {
         return true;
     }
 
+    static {
+        System.out.println("Company starts working!");
+    }
+
     public Company() {
         clients = new ArrayList<>();
         programmers = new ArrayList<>();
@@ -120,6 +124,7 @@ public class Company {
                 }
             }
         }
+        this.director.doAction();
         return result;
     }
 

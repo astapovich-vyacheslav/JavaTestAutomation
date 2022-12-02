@@ -6,7 +6,7 @@ import com.solvd.it.economy.reports.Report;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Director extends Worker {
+public final class Director extends Worker {
     private ArrayList<ProfitReport> profitReports = new ArrayList<>();
 
     public void addProfitReport(ProfitReport profitReport) {
