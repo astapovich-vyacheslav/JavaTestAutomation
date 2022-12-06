@@ -6,16 +6,18 @@ import com.solvd.it.people.Client;
 import com.solvd.it.people.Director;
 import com.solvd.it.people.Manager;
 import com.solvd.it.people.Programmer;
+import org.apache.log4j.Logger;
 
 import java.security.KeyPair;
 import java.util.*;
 
 public final class Company {
+    private static final Logger log = Logger.getLogger(Company.class);
     public static int totalOutcome = 0;
     private ArrayList<Programmer> programmers = new ArrayList<>();
     private Manager manager;
     private Director director;
-    private AllApps apps;
+    private AllApps apps = new AllApps();
     private ArrayList<Client> clients = new ArrayList<>();
 
     enum ProjectState {
@@ -84,7 +86,7 @@ public final class Company {
     }
 
     static {
-        System.out.println("Company starts working!");
+        log.info("Company starts working!");
     }
 
     public Company() {
@@ -106,7 +108,7 @@ public final class Company {
                         programmer.doAction();
                     }
                     entry.setValue(ProjectState.READY);
-                    apps.addApp(new App(entry.getKey().getProjectName()));
+                    this.apps.addApp(new App(entry.getKey().getProjectName()));
                     result += manager.getProfitFromClient(entry.getKey());
                 }
             }
@@ -114,15 +116,4 @@ public final class Company {
         this.director.doAction();
         return result;
     }
-
-//    private int getTotalOutcome() {
-//        int result = 0;
-//        result += this.director.getProjectIncome();
-//        result += this.manager.getProjectIncome();
-//        for (Programmer programmer :
-//                programmers) {
-//            result += programmer.getProjectIncome();
-//        }
-//        return result;
-//    }
 }

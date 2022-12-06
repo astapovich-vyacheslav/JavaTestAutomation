@@ -11,11 +11,12 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
-    public static final Logger log = Logger.getLogger(Main.class);
+    private static final Logger log = Logger.getLogger(Main.class);
     static SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH);
 
     static void printMenu() {
-        System.out.println("""
+        log.info("""
+                                
                 1 - Add client
                 2 - Add programmer
                 3 - Implement profitable projects
@@ -63,10 +64,3 @@ public class Main {
         } while (choice != 0);
     }
 }
-
-/* TODO
- *
- * remake programmers enum
- *
- *
- */

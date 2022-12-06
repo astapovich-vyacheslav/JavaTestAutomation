@@ -2,11 +2,13 @@ package com.solvd.it.people;
 
 import com.solvd.it.economy.reports.ProfitReport;
 import com.solvd.it.economy.reports.Report;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 public final class Director extends Worker {
+    private static final Logger log = Logger.getLogger(Director.class);
     private ArrayList<ProfitReport> profitReports = new ArrayList<>();
 
     public void addProfitReport(ProfitReport profitReport) {
@@ -65,7 +67,7 @@ public final class Director extends Worker {
 
     @Override
     public boolean doAction() {
-        System.out.println("Director is working");
+        log.info("Director is working");
         return true;
     }
 }

@@ -1,8 +1,12 @@
 package com.solvd.it.people;
 
+import org.apache.log4j.Logger;
+
 import java.util.Date;
 
 public class Programmer extends Worker {
+    private static final Logger log = Logger.getLogger(Programmer.class);
+
     enum Rank {
         JUNIOR,
         SENIOR,
@@ -44,7 +48,7 @@ public class Programmer extends Worker {
 
     @Override
     public boolean doAction() {
-        System.out.println(this.getName() + " is working");
+        log.info(this.getName() + " is working");
         return true;
     }
 

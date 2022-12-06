@@ -3,10 +3,12 @@ package com.solvd.it.people;
 import com.solvd.it.Company;
 import com.solvd.it.economy.IncomeAnalyzer;
 import com.solvd.it.economy.reports.ProfitReport;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
 public final class Manager extends Worker {
+    private static final Logger log = Logger.getLogger(Manager.class);
     private Dictionary<Client, IncomeAnalyzer> clientsMap;
 
     public void addClient(Client client) {
@@ -44,7 +46,7 @@ public final class Manager extends Worker {
 
     @Override
     public boolean doAction() {
-        System.out.println(this.getName() + " is working");
+        log.info(this.getName() + " is working");
         return true;
     }
 

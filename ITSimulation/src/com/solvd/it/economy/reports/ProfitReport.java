@@ -1,8 +1,11 @@
 package com.solvd.it.economy.reports;
 
+import org.apache.log4j.Logger;
+
 import java.util.Objects;
 
 public class ProfitReport implements Report {
+    private static final Logger log = Logger.getLogger(ProfitReport.class);
     private String projectName;
     private final int projectProfit;
 
@@ -47,7 +50,7 @@ public class ProfitReport implements Report {
     @Override
     public String getReportInfo(int income) {
         String result = "Project's profit is " + income;
-        System.out.println(result);
+        log.info(result);
         return result;
     }
 }
