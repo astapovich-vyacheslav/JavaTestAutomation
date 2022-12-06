@@ -38,7 +38,11 @@ public final class AllApps {
                 allApps) {
             ratingSum += app.getRating();
         }
-        this.averageRating = (double) ratingSum / appsCount;
-        return this.averageRating;
+        try {
+            this.averageRating = (double) ratingSum / appsCount;
+            return this.averageRating;
+        } catch (ArithmeticException e) {
+            return 0;
+        }
     }
 }

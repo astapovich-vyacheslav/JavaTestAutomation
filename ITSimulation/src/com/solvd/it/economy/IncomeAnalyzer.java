@@ -19,9 +19,6 @@ public class IncomeAnalyzer {
         this.totalOutcome = totalOutcome;
     }
 
-    public ArrayList<Worker> getWorkers() {
-        return workers;
-    }
 
     public boolean addWorker(Worker worker) {
         try {
@@ -59,18 +56,6 @@ public class IncomeAnalyzer {
 
     public int getProfit(Client client, int totalOutcome) {
         return client.getSuggestedPrice() - totalOutcome;
-    }
-
-    public IncomeAnalyzer(ArrayList<Worker> workersList, Client client) {
-        IncomeAnalyzer.workers = workersList;
-        this.client = client;
-
-        int profit = client.getSuggestedPrice();
-        for (Worker worker :
-                workers) {
-            this.totalOutcome += worker.getProjectIncome();
-        }
-        this.profit = profit - this.totalOutcome;
     }
 
     public IncomeAnalyzer(Client client, int totalOutcome) {

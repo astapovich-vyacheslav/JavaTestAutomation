@@ -1,6 +1,7 @@
 import com.solvd.it.Company;
 import com.solvd.it.economy.reports.ProfitReport;
 import com.solvd.it.people.*;
+import org.apache.log4j.Logger;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,6 +11,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
+    public static final Logger log = Logger.getLogger(Main.class);
     static SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH);
 
     static void printMenu() {
@@ -22,20 +24,28 @@ public class Main {
     }
 
     public static void main(String[] args) {
+
+
         Company company = new Company();
         while (company.getDirector() == null) {
-            System.out.println("Enter director's info:");
+            //System.out.println("Enter director's info:");
+            log.info("Enter director's info");
+
             company.setDirector(new Director(PersonGenerator.getNewWorkerData()));
         }
         while (company.getManager() == null) {
-            System.out.println("Enter manager's info:");
+            //System.out.println("Enter manager's info:");
+            log.info("Enter manager's info");
             company.setManager(new Manager(PersonGenerator.getNewWorkerData()));
         }
         int choice = 0;
         Scanner scanner = new Scanner(System.in);
         do {
             printMenu();
-            choice = scanner.nextByte();
+            try {
+                choice = scanner.nextByte();
+            } catch (Exception e) {
+            }
             switch (choice) {
                 case 1:
                     Client client = PersonGenerator.getNewClientData();
@@ -46,8 +56,17 @@ public class Main {
                     break;
                 case 3:
                     int result = company.completeWork();
-                    System.out.println("Total profit: " + result);
+                    //System.out.println("Total profit: " + result);
+                    log.info("Total profit: " + result);
+                    break;
             }
         } while (choice != 0);
     }
 }
+
+/* TODO
+ *
+ * remake programmers enum
+ *
+ *
+ */

@@ -41,4 +41,8 @@ public class App {
         this.name = name;
         this.requirements = requirements;
     }
+
+    public App(String name) {
+        this.name = name;
+    }
 }

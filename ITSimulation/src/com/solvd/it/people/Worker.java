@@ -34,11 +34,17 @@ public class Worker extends Person {
         this.projectIncome = projectIncome;
     }
 
-    int getIncome(int income) {
+    int getIncome(int income) throws ENegativeIncome {
+        if (income < 0) {
+            throw new ENegativeIncome();
+        }
         this.totalIncome += income;
         return this.totalIncome;
     }
 
+    public static class ENegativeIncome extends Exception {
+
+    }
 
     @Override
     public String toString() {

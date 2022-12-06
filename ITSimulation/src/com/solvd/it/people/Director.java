@@ -11,12 +11,15 @@ public final class Director extends Worker {
 
     public void addProfitReport(ProfitReport profitReport) {
         this.profitReports.add(profitReport);
-        this.getIncome(profitReport.getProjectProfit());
+        try {
+            this.getIncome(profitReport.getProjectProfit());
+        } catch (ENegativeIncome ignored) {
+
+        }
     }
 
     public void removeProfitReport(ProfitReport profitReport) {
         this.profitReports.remove(profitReport);
-        this.getIncome(-profitReport.getProjectProfit());
     }
 
     public ArrayList<ProfitReport> getProfitReports() {
@@ -30,7 +33,11 @@ public final class Director extends Worker {
         this.profitReports = profitReports;
         for (ProfitReport profitReport :
                 profitReports) {
-            this.getIncome(profitReport.getProjectProfit());
+            try {
+                this.getIncome(profitReport.getProjectProfit());
+            } catch (ENegativeIncome ignored) {
+
+            }
         }
     }
 
@@ -43,7 +50,11 @@ public final class Director extends Worker {
     }
 
     public int giveSalary(Worker worker, int salary) {
-        worker.getIncome(salary);
+        try {
+            worker.getIncome(salary);
+        } catch (ENegativeIncome ignored) {
+
+        }
         return worker.getTotalIncome();
     }
 

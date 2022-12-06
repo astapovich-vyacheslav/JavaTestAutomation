@@ -8,15 +8,6 @@ import java.util.*;
 
 public final class Manager extends Worker {
     private Dictionary<Client, IncomeAnalyzer> clientsMap;
-//    private int totalOutcome;
-//
-//    public int getTotalOutcome() {
-//        return totalOutcome;
-//    }
-//
-//    public void setTotalOutcome(int totalOutcome) {
-//        this.totalOutcome = totalOutcome;
-//    }
 
     public void addClient(Client client) {
         this.clientsMap.put(client, new IncomeAnalyzer());
@@ -29,7 +20,6 @@ public final class Manager extends Worker {
     public Manager(String name, Date dateOfBirth, int id, int projectIncome, int totalOutcome, ArrayList<Client> clients) {
         super(name, dateOfBirth, id, projectIncome);
         this.clientsMap = new Hashtable<>();
-        //this.totalOutcome = totalOutcome;
         if (clients == null)
             return;
         for (Client client :

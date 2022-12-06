@@ -7,11 +7,9 @@ public class Programmer extends Worker {
         JUNIOR,
         SENIOR,
         TECHLEAD;
-
         private int minimumSalary;
 
         Rank() {
-
         }
 
         int getMinimumSalary() {

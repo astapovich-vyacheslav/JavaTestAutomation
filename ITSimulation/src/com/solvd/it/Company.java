@@ -106,6 +106,7 @@ public final class Company {
                         programmer.doAction();
                     }
                     entry.setValue(ProjectState.READY);
+                    apps.addApp(new App(entry.getKey().getProjectName()));
                     result += manager.getProfitFromClient(entry.getKey());
                 }
             }
@@ -114,14 +115,14 @@ public final class Company {
         return result;
     }
 
-    private int getTotalOutcome() {
-        int result = 0;
-        result += this.director.getProjectIncome();
-        result += this.manager.getProjectIncome();
-        for (Programmer programmer :
-                programmers) {
-            result += programmer.getProjectIncome();
-        }
-        return result;
-    }
+//    private int getTotalOutcome() {
+//        int result = 0;
+//        result += this.director.getProjectIncome();
+//        result += this.manager.getProjectIncome();
+//        for (Programmer programmer :
+//                programmers) {
+//            result += programmer.getProjectIncome();
+//        }
+//        return result;
+//    }
 }
