@@ -50,7 +50,7 @@ public final class Manager extends Worker {
         return true;
     }
 
-    public boolean refreshClientMap(ArrayList<Client> clients) {
+    public boolean refreshClientMap(Iterable<Client> clients) {
         try {
             for (Client client :
                     clients) {

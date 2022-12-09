@@ -1,5 +1,6 @@
 package com.solvd.it.people;
 
+import com.solvd.it.custom.exceptions.*;
 import org.apache.log4j.Logger;
 
 import java.text.SimpleDateFormat;
@@ -71,12 +72,5 @@ public class PersonGenerator {
         }
     }
 
-    private static class ENegativeSalary extends Exception {
-    }
 
-    private static class ENegativePrice extends Exception {
-    }
-
-    private static class EEmptyName extends Exception {
-    }
 }

@@ -1,12 +1,14 @@
 package com.solvd.it.apps;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public final class AllApps {
-    private ArrayList<App> allApps = new ArrayList<>();
+    private HashSet<App> allApps = new HashSet<>();
     private double averageRating;
 
-    public ArrayList<App> getAllApps() {
+    public HashSet<App> getAllApps() {
         return allApps;
     }
 
@@ -24,7 +26,7 @@ public final class AllApps {
         return averageRating;
     }
 
-    public AllApps(ArrayList<App> allApps) {
+    public AllApps(HashSet<App> allApps) {
         this.allApps = allApps;
     }
 

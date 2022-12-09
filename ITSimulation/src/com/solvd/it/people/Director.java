@@ -1,5 +1,6 @@
 package com.solvd.it.people;
 
+import com.solvd.it.custom.exceptions.ENegativeIncome;
 import com.solvd.it.economy.reports.ProfitReport;
 import com.solvd.it.economy.reports.Report;
 import org.apache.log4j.Logger;

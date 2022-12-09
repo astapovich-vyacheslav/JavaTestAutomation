@@ -49,10 +49,18 @@ public class Client extends Person {
         this.suggestedPrice = suggestedPrice;
     }
 
+    public Client(String name, Date dateOfBirth, int id) {
+        super(name, dateOfBirth);
+        this.id = id;
+    }
+
+
     @Override
     public String toString() {
         return "Client{" +
-                "request=" + request +
+                "name=" + getName() +
+                ", date of birth=" + getDateOfBirth().toString() +
+                ", request=" + request +
                 ", projectName='" + projectName + '\'' +
                 ", id=" + id +
                 ", suggestedPrice=" + suggestedPrice +
@@ -64,7 +72,7 @@ public class Client extends Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
-        return id == client.id && suggestedPrice == client.suggestedPrice &&
+        return Objects.equals(getName(), client.getName()) && getDateOfBirth() == client.getDateOfBirth() && id == client.id && suggestedPrice == client.suggestedPrice &&
                 request.equals(client.request) && projectName.equals(client.projectName);
     }
 

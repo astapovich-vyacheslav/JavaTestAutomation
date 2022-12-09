@@ -1,4 +1,5 @@
 import com.solvd.it.Company;
+import com.solvd.it.custom.structures.CustomLinkedList;
 import com.solvd.it.economy.reports.ProfitReport;
 import com.solvd.it.people.*;
 import org.apache.log4j.Logger;
@@ -26,6 +27,29 @@ public class Main {
 
     public static void main(String[] args) {
 
+        //Testing custom linked list
+        try {
+            CustomLinkedList<Client> list = new CustomLinkedList<>();
+            Client cl1 = new Client("name1", sdf.parse("20.11.2002"), 0);
+            Client cl2 = new Client("name2", sdf.parse("20.11.2002"), 1);
+            Client cl3 = new Client("name3", sdf.parse("20.11.2002"), 2);
+            Client cl4 = new Client("name4", sdf.parse("20.11.2002"), 3);
+            list.add(cl1);
+            list.add(cl2);
+            list.add(cl3);
+            list.add(cl4);
+            list.print();
+            list.remove(cl1);
+            list.print();
+            list.remove(cl4);
+            list.print();
+            list.add(cl1);
+            list.remove(cl3);
+            list.print();
+            log.info("");
+            list.printFlipped();
+        } catch (Exception ignored) {
+        }
 
         Company company = new Company();
         while (company.getDirector() == null) {

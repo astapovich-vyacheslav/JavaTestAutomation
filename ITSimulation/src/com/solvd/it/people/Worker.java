@@ -1,5 +1,7 @@
 package com.solvd.it.people;
 
+import com.solvd.it.custom.exceptions.ENegativeIncome;
+
 import java.util.Date;
 import java.util.Objects;
 
@@ -42,9 +44,6 @@ public class Worker extends Person {
         return this.totalIncome;
     }
 
-    public static class ENegativeIncome extends Exception {
-
-    }
 
     @Override
     public String toString() {

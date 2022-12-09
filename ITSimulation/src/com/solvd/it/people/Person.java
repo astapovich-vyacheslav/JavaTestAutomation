@@ -1,5 +1,7 @@
 package com.solvd.it.people;
 
+import com.solvd.it.custom.exceptions.EUnderagePerson;
+
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -38,10 +40,6 @@ public abstract class Person {
             throw new EUnderagePerson();
         }
         return (int) diff;
-
-    }
-
-    public static class EUnderagePerson extends Exception {
 
     }
 

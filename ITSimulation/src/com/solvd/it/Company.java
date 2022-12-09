@@ -7,6 +7,7 @@ import com.solvd.it.people.Director;
 import com.solvd.it.people.Manager;
 import com.solvd.it.people.Programmer;
 import org.apache.log4j.Logger;
+import org.apache.log4j.Priority;
 
 import java.security.KeyPair;
 import java.util.*;
@@ -14,7 +15,7 @@ import java.util.*;
 public final class Company {
     private static final Logger log = Logger.getLogger(Company.class);
     public static int totalOutcome = 0;
-    private ArrayList<Programmer> programmers = new ArrayList<>();
+    private LinkedList<Programmer> programmers = new LinkedList<>();
     private Manager manager;
     private Director director;
     private AllApps apps = new AllApps();
