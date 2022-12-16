@@ -10,9 +10,8 @@ import com.solvd.it.people.Programmer;
 import java.security.KeyPair;
 import java.util.*;
 
-import org.apache.logging.log4j.LogManager;
-
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 public final class Company {
     private static final Logger log = LogManager.getLogger(Company.class);

@@ -2,9 +2,9 @@ package com.solvd.it.people;
 
 import com.solvd.it.custom.exceptions.*;
 
-import org.apache.logging.log4j.LogManager;
+import org.apache.log4j.LogManager;
 
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;

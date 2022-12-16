@@ -2,29 +2,37 @@ package com.solvd.it;
 
 import com.solvd.it.people.*;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Scanner;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class Main {
     static SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH);
     public static final Logger log = LogManager.getLogger(Main.class);
 
     static void printMenu() {
-        log.info("""
-                                
-                1 - Add client
-                2 - Add programmer
-                3 - Implement profitable projects
-                0 - Exit
-                """);
+        log.info(" 1 - Add client \n2 - Add programmer \n3 - Implement profitable projects \n0 - Exit ");
     }
 
     public static void main(String[] args) {
-
+        BasicConfigurator.configure();
+        File input = new File("text.txt");
+        File output = new File("output.txt");
+        Integer outputValue = FileTask.getUniqueWordsNumber(input);
+        try {
+            FileUtils.writeStringToFile(output, outputValue.toString(), "US-ASCII");
+            log.info(outputValue);
+        } catch (IOException ignored) {
+        }
         Company company = new Company();
         while (company.getDirector() == null) {
             //System.out.println("Enter director's info:");
