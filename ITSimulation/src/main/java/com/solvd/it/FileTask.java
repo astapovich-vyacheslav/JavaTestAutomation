@@ -6,15 +6,15 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class FileTask {
     public static int getUniqueWordsNumber(File file) {
         try {
             String content = FileUtils.readFileToString(file, "US-ASCII");
-            String[] strings = StringUtils.split(content);
-            int result = 0;
-            Set<String> seenStrings = new HashSet<>(Arrays.asList(strings));
-            return seenStrings.size();
+            List<String> strings = Arrays.stream(StringUtils.split(content))
+                    .distinct().toList();
+            return strings.size();
         } catch (IOException e) {
             return 0;
         }

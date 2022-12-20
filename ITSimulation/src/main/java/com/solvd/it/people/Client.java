@@ -1,17 +1,24 @@
 package com.solvd.it.people;
 
 
+import com.solvd.it.Company;
 import com.solvd.it.requirements.Requirement;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
+import java.util.function.Function;
 
 public class Client extends Person {
     private ArrayList<Requirement> request = new ArrayList<>();
     private String projectName;
     private final int id;
     private int suggestedPrice;
+
+    Function<Integer, Integer> raisePrice = (raise) -> {
+        this.suggestedPrice += raise;
+        return suggestedPrice - Company.totalOutcome;
+    };
 
     public int getId() {
         return id;

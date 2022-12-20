@@ -10,12 +10,13 @@ public class Programmer extends Worker {
     private static final Logger log = LogManager.getLogger(Programmer.class);
 
     enum Rank {
-        JUNIOR,
-        SENIOR,
-        TECHLEAD;
+        JUNIOR(100),
+        SENIOR(200),
+        TECHLEAD(250);
         private int minimumSalary;
 
-        Rank() {
+        Rank(int salary) {
+            this.minimumSalary = salary;
         }
 
         int getMinimumSalary() {

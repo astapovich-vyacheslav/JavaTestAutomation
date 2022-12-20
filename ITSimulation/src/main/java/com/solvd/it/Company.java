@@ -9,6 +9,8 @@ import com.solvd.it.people.Programmer;
 
 import java.security.KeyPair;
 import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -29,6 +31,10 @@ public final class Company {
     }
 
     private Map<Client, ProjectState> projectStates = new HashMap<>();
+
+    Predicate<Client> isProfitable = (c) -> {
+        return c.getSuggestedPrice() > totalOutcome;
+    };
 
     public Manager getManager() {
         return manager;
@@ -105,10 +111,11 @@ public final class Company {
                 if (!this.manager.checkProfitability(entry.getKey())) {
                     entry.setValue(ProjectState.NOT_PROFITABLE);
                 } else {
-                    for (Programmer programmer :
-                            programmers) {
-                        programmer.doAction();
-                    }
+//                    for (Programmer programmer :
+//                            programmers) {
+//                        programmer.doAction();
+//                    }
+                    programmers.stream().forEach((p) -> p.doAction());
                     entry.setValue(ProjectState.READY);
                     this.apps.addApp(new App(entry.getKey().getProjectName()));
                     result += manager.getProfitFromClient(entry.getKey());
@@ -117,5 +124,29 @@ public final class Company {
         }
         this.director.doAction();
         return result;
+    }
+
+    public List<Client> getProfitableClients() {
+        return clients.stream()
+                .filter(c -> c.getSuggestedPrice() > totalOutcome)
+                .collect(Collectors.toList());
+    }
+
+    public List<String> getUsedTechnologies() {
+        return programmers.stream()
+                .map(c -> c.getUsedTechnology())
+                .distinct().collect(Collectors.toList());
+    }
+
+    public int getCheapest() {
+        return programmers.stream()
+                .map(c -> c.getProjectIncome())
+                .min(Integer::compare).get();
+    }
+
+    public List<Integer> getPrices() {
+        return clients.stream()
+                .map(c -> c.getSuggestedPrice())
+                .sorted().collect(Collectors.toList());
     }
 }
