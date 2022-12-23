@@ -34,17 +34,19 @@ public class Main {
         } catch (IOException ignored) {
         }
         Company company = new Company();
-        while (company.getDirector() == null) {
-            //System.out.println("Enter director's info:");
-            log.info("Enter director's info");
-
-            company.setDirector(new Director(PersonGenerator.getNewWorkerData()));
-        }
-        while (company.getManager() == null) {
-            //System.out.println("Enter manager's info:");
-            log.info("Enter manager's info");
-            company.setManager(new Manager(PersonGenerator.getNewWorkerData()));
-        }
+//        while (company.getDirector() == null) {
+//            //System.out.println("Enter director's info:");
+//            log.info("Enter director's info");
+//
+//            company.setDirector(new Director(PersonGenerator.getNewWorkerData()));
+//        }
+//        while (company.getManager() == null) {
+//            //System.out.println("Enter manager's info:");
+//            log.info("Enter manager's info");
+//            company.setManager(new Manager(PersonGenerator.getNewWorkerData()));
+//        }
+        company.setDirector(new Director("dir", IdTracker.getId(), 300));
+        company.setManager(new Manager("man", IdTracker.getId(), 200));
         int choice = 0;
         Scanner scanner = new Scanner(System.in);
         do {

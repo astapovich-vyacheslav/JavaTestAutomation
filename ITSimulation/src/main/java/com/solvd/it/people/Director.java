@@ -3,6 +3,8 @@ package com.solvd.it.people;
 import com.solvd.it.custom.exceptions.ENegativeIncome;
 import com.solvd.it.economy.reports.ProfitReport;
 
+import com.solvd.it.utils.IIncomeGiver;
+import com.solvd.it.utils.IRaiser;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -57,17 +59,30 @@ public final class Director extends Worker {
         super(name, dateOfBirth, id, projectIncome);
     }
 
+    public Director(String name, int id, int projectIncome) {
+        super(name, id, projectIncome);
+    }
+
     public Director(Worker worker) {
         super(worker.getName(), worker.getDateOfBirth(), worker.getId(), worker.getProjectIncome());
     }
 
     public int giveSalary(Worker worker, int salary) {
-        try {
-            worker.getIncome(salary);
-        } catch (ENegativeIncome ignored) {
-
-        }
+        IIncomeGiver<Worker, Integer> incomeGiver = (w, t) -> {
+            try {
+                w.getIncome(t);
+            } catch (ENegativeIncome ignored) {
+            }
+        };
         return worker.getTotalIncome();
+    }
+
+    public int raise(Worker worker, int raiseValue) {
+        IRaiser<Integer, Worker, Integer> raiser = (w, r) -> {
+            w.setProjectIncome(w.getProjectIncome() + r);
+            return w.getProjectIncome();
+        };
+        return raiser.raise(worker, raiseValue);
     }
 
     public int getIncome(int income, ProfitReport report) {

@@ -12,9 +12,8 @@ public class FileTask {
     public static int getUniqueWordsNumber(File file) {
         try {
             String content = FileUtils.readFileToString(file, "US-ASCII");
-            List<String> strings = Arrays.stream(StringUtils.split(content))
-                    .distinct().toList();
-            return strings.size();
+            return Arrays.stream(StringUtils.split(content))
+                    .distinct().toList().size();
         } catch (IOException e) {
             return 0;
         }

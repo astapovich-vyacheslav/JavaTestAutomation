@@ -2,16 +2,18 @@ package com.solvd.it;
 
 import com.solvd.it.apps.AllApps;
 import com.solvd.it.apps.App;
-import com.solvd.it.people.Client;
-import com.solvd.it.people.Director;
-import com.solvd.it.people.Manager;
-import com.solvd.it.people.Programmer;
+import com.solvd.it.people.*;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.security.KeyPair;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import com.solvd.it.utils.IAction;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -35,6 +37,8 @@ public final class Company {
     Predicate<Client> isProfitable = (c) -> {
         return c.getSuggestedPrice() > totalOutcome;
     };
+
+    private IAction<Programmer> action = p -> p.doAction();
 
     public Manager getManager() {
         return manager;
@@ -115,9 +119,25 @@ public final class Company {
 //                            programmers) {
 //                        programmer.doAction();
 //                    }
-                    programmers.stream().forEach((p) -> p.doAction());
+                    programmers.stream().forEach(p -> action.doAction(p));
                     entry.setValue(ProjectState.READY);
-                    this.apps.addApp(new App(entry.getKey().getProjectName()));
+                    try {
+                        Class appClass = Class.forName("com.solvd.it.apps.App");
+                        Field[] fields = appClass.getFields();
+                        Constructor<App>[] constructors = appClass.getConstructors();
+                        Method[] methods = appClass.getMethods();
+                        Class[] params = {String.class};
+                        App app = (App) appClass.getConstructor(params)
+                                .newInstance(entry.getKey().getProjectName());
+                        Method appName = appClass.getDeclaredMethod("getName");
+                        log.info(appName.invoke(app));
+                    } catch (ClassNotFoundException | InstantiationException
+                             | IllegalAccessException | NoSuchMethodException
+                             | InvocationTargetException ignored) {
+                    }
+
+                    //
+                    //this.apps.addApp(new App(entry.getKey().getProjectName()));
                     result += manager.getProfitFromClient(entry.getKey());
                 }
             }
@@ -126,24 +146,28 @@ public final class Company {
         return result;
     }
 
+    //gets list of profitable clients
     public List<Client> getProfitableClients() {
         return clients.stream()
                 .filter(c -> c.getSuggestedPrice() > totalOutcome)
                 .collect(Collectors.toList());
     }
 
+    //gets list of all distinct used technologies
     public List<String> getUsedTechnologies() {
         return programmers.stream()
                 .map(c -> c.getUsedTechnology())
                 .distinct().collect(Collectors.toList());
     }
 
+    //gets value of the minimum project income in programmers
     public int getCheapest() {
         return programmers.stream()
                 .map(c -> c.getProjectIncome())
                 .min(Integer::compare).get();
     }
 
+    //Gets list of prices of clients' suggestions
     public List<Integer> getPrices() {
         return clients.stream()
                 .map(c -> c.getSuggestedPrice())

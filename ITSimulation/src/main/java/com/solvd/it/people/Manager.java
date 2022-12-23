@@ -12,7 +12,7 @@ import java.util.*;
 
 public final class Manager extends Worker {
     private static final Logger log = LogManager.getLogger(Manager.class);
-    private HashMap<Client, IncomeAnalyzer> clientsMap;
+    private HashMap<Client, IncomeAnalyzer> clientsMap = new HashMap<>();
 
     public void addClient(Client client) {
         this.clientsMap.put(client, new IncomeAnalyzer());
@@ -35,6 +35,11 @@ public final class Manager extends Worker {
 
     public Manager(Worker worker) {
         super(worker.getName(), worker.getDateOfBirth(), worker.getId(), worker.getProjectIncome());
+        this.clientsMap = new HashMap<>();
+    }
+
+    public Manager(String name, int id, int projectIncome) {
+        super(name, id, projectIncome);
         this.clientsMap = new HashMap<>();
     }
 
@@ -68,4 +73,6 @@ public final class Manager extends Worker {
     public boolean checkProfitability(Client client) {
         return clientsMap.get(client).isProfitable(client, Company.totalOutcome);
     }
+
+
 }

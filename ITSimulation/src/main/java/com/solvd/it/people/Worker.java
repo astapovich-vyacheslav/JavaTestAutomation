@@ -37,6 +37,12 @@ public class Worker extends Person {
         this.projectIncome = projectIncome;
     }
 
+    public Worker(String name, int id, int projectIncome) {
+        super(name);
+        this.id = id;
+        this.projectIncome = projectIncome;
+    }
+
     int getIncome(int income) throws ENegativeIncome {
         if (income < 0) {
             throw new ENegativeIncome();
@@ -68,7 +74,6 @@ public class Worker extends Person {
         return Objects.hash(projectIncome, id, totalIncome);
     }
 
-    @Override
     boolean doAction() {
         return false;
     }

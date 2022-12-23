@@ -31,6 +31,10 @@ public abstract class Person {
         this.dateOfBirth = dateOfBirth;
     }
 
+    public Person(String name) {
+        this.name = name;
+    }
+
     public final int getAge() throws EUnderagePerson {
         Date now = new Date();
         long diffInMilliseconds = Math.abs(now.getTime() - dateOfBirth.getTime());
