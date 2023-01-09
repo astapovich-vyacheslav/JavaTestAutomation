@@ -12,8 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Scanner;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 
 public class Main {
     static SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH);
@@ -25,15 +23,8 @@ public class Main {
 
     public static void main(String[] args) {
         BasicConfigurator.configure();
-        File input = new File("text.txt");
-        File output = new File("output.txt");
-        Integer outputValue = FileTask.getUniqueWordsNumber(input);
-        try {
-            FileUtils.writeStringToFile(output, outputValue.toString(), "US-ASCII");
-            log.info(outputValue);
-        } catch (IOException ignored) {
-        }
         Company company = new Company();
+        
 //        while (company.getDirector() == null) {
 //            //System.out.println("Enter director's info:");
 //            log.info("Enter director's info");

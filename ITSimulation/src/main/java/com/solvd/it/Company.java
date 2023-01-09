@@ -14,6 +14,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import com.solvd.it.utils.IAction;
+import jdk.dynalink.Operation;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -121,23 +122,8 @@ public final class Company {
 //                    }
                     programmers.stream().forEach(p -> action.doAction(p));
                     entry.setValue(ProjectState.READY);
-                    try {
-                        Class appClass = Class.forName("com.solvd.it.apps.App");
-                        Field[] fields = appClass.getFields();
-                        Constructor<App>[] constructors = appClass.getConstructors();
-                        Method[] methods = appClass.getMethods();
-                        Class[] params = {String.class};
-                        App app = (App) appClass.getConstructor(params)
-                                .newInstance(entry.getKey().getProjectName());
-                        Method appName = appClass.getDeclaredMethod("getName");
-                        log.info(appName.invoke(app));
-                    } catch (ClassNotFoundException | InstantiationException
-                             | IllegalAccessException | NoSuchMethodException
-                             | InvocationTargetException ignored) {
-                    }
-
-                    //
-                    //this.apps.addApp(new App(entry.getKey().getProjectName()));
+                    
+                    this.apps.addApp(new App(entry.getKey().getProjectName()));
                     result += manager.getProfitFromClient(entry.getKey());
                 }
             }
